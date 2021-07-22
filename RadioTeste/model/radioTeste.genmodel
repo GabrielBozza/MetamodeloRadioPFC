@@ -10,8 +10,8 @@
   <testsDirectory xsi:nil="true"/>
   <genPackages prefix="RadioTeste" disposableProviderFactory="true" ecorePackage="radioTeste.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="radioTeste.ecore#//OrderType">
-      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//OrderType/ASC"/>
-      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//OrderType/DESC"/>
+      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//OrderType/SampleValue_ASC"/>
+      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//OrderType/Samplevalue_DESC"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="radioTeste.ecore#//SecurityLevel">
       <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SecurityLevel/Low"/>
@@ -22,13 +22,14 @@
       <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//CarrierFrequency/B"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="radioTeste.ecore#//OperationalRole">
-      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//OperationalRole/Cmd"/>
+      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//OperationalRole/Cmt"/>
       <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//OperationalRole/Soldier"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="radioTeste.ecore#//SituationMode">
-      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SituationMode/SILENCE"/>
-      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SituationMode/TALK"/>
-      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SituationMode/OTHER"/>
+      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SituationMode/SILENCE_MODE"/>
+      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SituationMode/ALERT_MODE"/>
+      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SituationMode/FULLDUPLEX_MODE"/>
+      <genEnumLiterals ecoreEnumLiteral="radioTeste.ecore#//SituationMode/NORMAL_MODE"/>
     </genEnums>
     <genClasses ecoreClass="radioTeste.ecore#//LogEntry">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference radioTeste.ecore#//LogEntry/signal"/>
@@ -37,17 +38,18 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference radioTeste.ecore#//LogEntry/oprole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference radioTeste.ecore#//LogEntry/securityLevel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference radioTeste.ecore#//LogEntry/SampleValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute radioTeste.ecore#//LogEntry/OrderType"/>
     </genClasses>
     <genClasses ecoreClass="radioTeste.ecore#//Transciever">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute radioTeste.ecore#//Transciever/id"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//Transciever/carrierfreq"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//Transciever/oprole"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute radioTeste.ecore#//Transciever/Mode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//Transciever/perceives"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//Transciever/log"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute radioTeste.ecore#//Transciever/RadioMode"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//Transciever/seclevel"/>
     </genClasses>
     <genClasses ecoreClass="radioTeste.ecore#//SampleSignal">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//SampleSignal/securitylevel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//SampleSignal/SampleValue"/>
     </genClasses>
     <genClasses ecoreClass="radioTeste.ecore#//Log">
@@ -56,7 +58,6 @@
     </genClasses>
     <genClasses ecoreClass="radioTeste.ecore#//OpRole">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute radioTeste.ecore#//OpRole/Role"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference radioTeste.ecore#//OpRole/logentry"/>
     </genClasses>
     <genClasses ecoreClass="radioTeste.ecore#//CarrierFreq">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute radioTeste.ecore#//CarrierFreq/Value"/>
