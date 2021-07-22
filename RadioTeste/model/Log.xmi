@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<radioTeste:Log
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:radioTeste="http://www.example.org/radioTeste"
+    xsi:schemaLocation="http://www.example.org/radioTeste radioTeste.ecore">
+  <logData TimeStamp="7">
+    <signal
+        securitylevel="//@logData.0/@securityLevel"
+        SampleValue="//@logData.0/@SampleValue"/>
+    <carrierfreq/>
+    <oprole/>
+    <securityLevel
+        SecLevel="High"/>
+    <SampleValue
+        Value="10.0"/>
+  </logData>
+  <logData TimeStamp="6">
+    <signal
+        securitylevel="//@logData.1/@securityLevel"
+        SampleValue="//@logData.1/@SampleValue"/>
+    <carrierfreq
+        Value="B"/>
+    <oprole
+        Role="Cmd"/>
+    <securityLevel/>
+    <SampleValue
+        Value="3.0"/>
+  </logData>
+  <logData TimeStamp="1">
+    <signal
+        securitylevel="//@logData.2/@securityLevel"
+        SampleValue="//@logData.2/@SampleValue"/>
+    <carrierfreq/>
+    <oprole/>
+    <securityLevel/>
+    <SampleValue
+        Value="2.0"/>
+  </logData>
+  <logData TimeStamp="33">
+    <signal
+        securitylevel="//@logData.3/@securityLevel"
+        SampleValue="//@logData.3/@SampleValue"/>
+    <carrierfreq/>
+    <oprole
+        Role="Cmd"/>
+    <securityLevel
+        SecLevel="High"/>
+    <SampleValue
+        Value="25.0"/>
+  </logData>
+</radioTeste:Log>

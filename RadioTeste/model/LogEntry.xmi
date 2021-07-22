@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<radioTeste:LogEntry xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:radioTeste="http://www.example.org/radioTeste" xsi:schemaLocation="http://www.example.org/radioTeste radioTeste.ecore"/>

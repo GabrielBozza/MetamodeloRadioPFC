@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ecore:EPackage [
+<!ENTITY _0 "http://www.eclipse.org/emf/2003/XMLType">
+<!ENTITY _1 "http://www.eclipse.org/emf/2002/Ecore">
+]>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="radioTeste" nsURI="http://www.example.org/radioTeste" nsPrefix="radioTeste">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+    <details key="ecore.xml.type" value="http://www.eclipse.org/emf/2003/XMLType"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="LogEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signal" lowerBound="1"
+        eType="#//SampleSignal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="TimeStamp" lowerBound="1"
+        eType="ecore:EDataType &_0;#//Int"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="carrierfreq" lowerBound="1"
+        eType="#//CarrierFreq" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oprole" lowerBound="1"
+        eType="#//OpRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//Security" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SampleValue" lowerBound="1"
+        eType="#//SampleValue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transciever">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType &_1;#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="carrierfreq" eType="#//CarrierFreq"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oprole" eType="#//OpRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="perceives" eType="#//SampleSignal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="#//Log" eOpposite="#//Log/transciever"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Mode" eType="#//SituationMode"
+        defaultValueLiteral="SILENCE" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;&#x9;if(self.log.logData.carrierfreq.Value = CarrierFrequency::A and self.log.logData.securityLevel.SecLevel = SecurityLevel::Low) then SituationMode::SILENCE&#xA;&#x9;&#x9;&#x9;&#x9;else SituationMode::TALK&#xA;&#x9;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SampleSignal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitylevel" eType="#//Security"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SampleValue" lowerBound="1"
+        eType="#//SampleValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OrderType">
+    <eLiterals name="ASC"/>
+    <eLiterals name="DESC" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SecurityLevel">
+    <eLiterals name="Low"/>
+    <eLiterals name="High" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CarrierFrequency">
+    <eLiterals name="A"/>
+    <eLiterals name="B" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationalRole">
+    <eLiterals name="Cmd"/>
+    <eLiterals name="Soldier" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SituationMode">
+    <eLiterals name="SILENCE"/>
+    <eLiterals name="TALK" value="1"/>
+    <eLiterals name="OTHER" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Log">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="OrderTypeSeq OrderTypeSeq2 OrderTypeSeq3"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="OrderTypeSeq" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.logData.TimeStamp->at(self.logData.TimeStamp->size()-1) = 1"/>
+      <details key="OrderTypeSeq2" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.logData.TimeStamp->at(self.logData.TimeStamp->size()) = 33"/>
+      <details key="OrderTypeSeq3" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.logData.TimeStamp->at(self.logData.TimeStamp->size()-2) = 5"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logData" upperBound="-1"
+        eType="#//LogEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transciever" eType="#//Transciever"
+        eOpposite="#//Transciever/log"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OrderTypeValue" eType="#//OrderType"
+        defaultValueLiteral="DESC" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;if(self.logData.SampleValue.Value->at(self.logData->size()-2) > self.logData.SampleValue.Value->at(self.logData->size()-1)) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(self.logData.SampleValue.Value->at(self.logData->size()-1) > self.logData.SampleValue.Value->at(self.logData->size()))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then OrderType::DESC&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else OrderType::ASC&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(self.logData.SampleValue.Value->at(self.logData->size()-2) &lt; self.logData.SampleValue.Value->at(self.logData->size()-1)) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if(self.logData.SampleValue.Value->at(self.logData->size()-1) &lt; self.logData.SampleValue.Value->at(self.logData->size()))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then OrderType::ASC&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else OrderType::DESC&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else OrderType::DESC&#xA;&#x9;&#x9;&#x9;&#x9; &#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="CarrierFrequencyValue"
+        eType="#//CarrierFrequency" defaultValueLiteral="A" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.logData.carrierfreq.Value->last()"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OperationalRoleValue" eType="#//OperationalRole"
+        defaultValueLiteral="Cmd" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.logData.oprole.Role->last()"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SecurityLevelValue" eType="#//SecurityLevel"
+        defaultValueLiteral="High" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.logData.securityLevel.SecLevel->last()"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpRole">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Role" eType="#//OperationalRole"
+        defaultValueLiteral="Soldier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logentry" eType="#//LogEntry"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CarrierFreq">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" eType="#//CarrierFrequency"
+        defaultValueLiteral="A"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Security">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SecLevel" eType="#//SecurityLevel"
+        defaultValueLiteral="Low"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SampleValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" lowerBound="1" eType="ecore:EDataType &_0;#//Double"/>
+  </eClassifiers>
+</ecore:EPackage>
