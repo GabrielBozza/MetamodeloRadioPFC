@@ -11,49 +11,42 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="LogEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="signal" lowerBound="1"
-        eType="#//SampleSignal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="TimeStamp" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//DateTime"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="carrierfreq" lowerBound="1"
-        eType="#//CarrierFreq" containment="true"/>
+        eType="#//CarrierFrequency" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="oprole" lowerBound="1"
-        eType="#//OpRole" containment="true"/>
+        eType="#//OperationalRole" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
-        eType="#//Security" containment="true"/>
+        eType="#//SecurityLevel" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="SampleValue" lowerBound="1"
-        eType="#//SampleValue" containment="true"/>
+        eType="#//SignalToNoiseRatio" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="OrderType" eType="#//OrderType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transciever">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="carrierfreq" lowerBound="1"
-        eType="#//CarrierFreq"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oprole" lowerBound="1"
-        eType="#//OpRole"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="perceives" eType="#//SampleSignal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="perceives" eType="#//Environment"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="#//Log" eOpposite="#//Log/transciever"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="RadioMode" eType="#//SituationMode"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="seclevel" lowerBound="1"
-        eType="#//Security"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checkPlan" eType="#//CommunicationsPlan"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SampleSignal">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="SampleValue" lowerBound="1"
-        eType="#//SampleValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Environment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SNRValue" lowerBound="1"
+        eType="#//SignalToNoiseRatio"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OrderType">
-    <eLiterals name="SampleValue_ASC"/>
-    <eLiterals name="Samplevalue_DESC" value="1"/>
+    <eLiterals name="SNRValues_ASC"/>
+    <eLiterals name="SNRValues_DESC" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="SecurityLevel">
+  <eClassifiers xsi:type="ecore:EEnum" name="SecurityLevelValues">
     <eLiterals name="Low"/>
     <eLiterals name="High" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="CarrierFrequency">
+  <eClassifiers xsi:type="ecore:EEnum" name="CarrierFrequencyValues">
     <eLiterals name="A"/>
     <eLiterals name="B" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="OperationalRole">
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationalRoleValues">
     <eLiterals name="Cmt"/>
     <eLiterals name="Soldier" value="1"/>
   </eClassifiers>
@@ -77,19 +70,27 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transciever" eType="#//Transciever"
         eOpposite="#//Transciever/log"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OpRole">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Role" eType="#//OperationalRole"
+  <eClassifiers xsi:type="ecore:EClass" name="OperationalRole">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Role" eType="#//OperationalRoleValues"
         defaultValueLiteral="Soldier"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CarrierFreq">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" eType="#//CarrierFrequency"
+  <eClassifiers xsi:type="ecore:EClass" name="CarrierFrequency">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" eType="#//CarrierFrequencyValues"
         defaultValueLiteral="A"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Security">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SecLevel" eType="#//SecurityLevel"
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityLevel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SecLevel" eType="#//SecurityLevelValues"
         defaultValueLiteral="Low"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SampleValue">
+  <eClassifiers xsi:type="ecore:EClass" name="SignalToNoiseRatio">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommunicationsPlan">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="carrierFreq" lowerBound="1"
+        eType="#//CarrierFrequency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opRole" lowerBound="1"
+        eType="#//OperationalRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="security" lowerBound="1"
+        eType="#//SecurityLevel"/>
   </eClassifiers>
 </ecore:EPackage>
